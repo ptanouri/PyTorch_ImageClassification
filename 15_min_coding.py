@@ -48,35 +48,43 @@ loss_func = nn.CrossEntropyLoss()
     #Train the model
     
 if __name__ == "__main__":
-    # with open('model.pt', 'rb') as f:
-    #     clf.load_state_dict(load(f))
+    with open('model.pt', 'rb') as f:
         
-    # img = Image.open('6.png')
-    # img_tensor = ToTensor()(img).unsqueeze(0).to('cpu')
-    
-    
-    # print(torch.argmax(clf(img_tensor)))
-    
-    
-    
-    for epoch in range(1):
-        for batch in dataset:
-            X,y = batch
-            X, y = X.to('cpu'), y.to('cpu')
-            
-            y_pred = clf(X)
-            loss = loss_func(y_pred, y)
-            
-            #apply backpropagation
-            
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
-        print(f"Epoch {epoch} Loss: {loss.item()}")
+        clf = torch.load('model.pt')
+        # clf.load_state_dict(load(f))
         
-    with open('model.pt', 'wb') as f:
-        torch.save(clf, f)
+    img = Image.open('7.png')
+    img = img.convert('L')  # Convert to grayscale if not already in grayscale
+    img = img.resize((28, 28))
 
-print("Torch version:",torch.__version__)
+    
+    img_tensor = ToTensor()(img).unsqueeze(0).to('cpu')
+    
+    
+    
+    
+    print(torch.argmax(clf(img_tensor)))
+    
+    
+    
+#     for epoch in range(10):
+#         for batch in dataset:
+#             X,y = batch
+#             X, y = X.to('cpu'), y.to('cpu')
+            
+#             y_pred = clf(X)
+#             loss = loss_func(y_pred, y)
+            
+#             #apply backpropagation
+            
+#             optimizer.zero_grad()
+#             loss.backward()
+#             optimizer.step()
+#         print(f"Epoch {epoch} Loss: {loss.item()}")
+        
+#     with open('model.pt', 'wb') as f:
+#         torch.save(clf, f)
 
-print("Is CUDA enabled?",torch.cuda.is_available())
+# print("Torch version:",torch.__version__)
+
+# print("Is CUDA enabled?",torch.cuda.is_available())

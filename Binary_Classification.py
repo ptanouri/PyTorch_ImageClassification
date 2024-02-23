@@ -68,9 +68,6 @@ def plot_decision_boundary(model, X, y):
 
 
 
-
-import torch.nn as nn
-
 class SimpleNN(nn.Module):
     def __init__(self):
         super(SimpleNN, self).__init__()
@@ -83,46 +80,10 @@ class SimpleNN(nn.Module):
         return x
 
 
-import torch
-import torch.nn as nn
-import torch.optim as optim
-import numpy as np
-
-# Assuming X and y are the synthetic dataset you've generated previously
-
-# Convert the dataset to PyTorch tensors
-X = torch.tensor(X, dtype=torch.float32)
-y = torch.tensor(y, dtype=torch.float32).view(-1, 1)
-
-# Define the model, loss function, and optimizer
-model = SimpleNN()
-criterion = nn.BCELoss()
-optimizer = optim.SGD(model.parameters(), lr=0.1)
-
-# Train the model
-num_epochs = 1000
-for epoch in range(num_epochs):
-    # Forward pass
-    outputs = model(X)
-    loss = criterion(outputs, y)
-
-    # Backward pass and optimization
-    optimizer.zero_grad()
-    loss.backward()
-    optimizer.step()
-
-    # Print progress
-    if (epoch+1) % 100 == 0:
-        print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.4f}')
-
-
-# Assuming X_test is your test dataset
-# Convert the test dataset to PyTorch tensor
-
-import numpy as np
 
 # Generate synthetic test data
 np.random.seed(1)
+# Assuming X_test is your test dataset
 X_test = np.random.randn(20, 2)
 
 # Now 'X_test' contains a synthetic test dataset with 20 samples and 2 features
@@ -138,3 +99,4 @@ with torch.no_grad():
 predictions = predictions.numpy()
 
 # Now 'predictions' contains the predicted values for your test dataset
+print('predictions',predictions)

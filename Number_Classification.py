@@ -53,7 +53,7 @@ if __name__ == "__main__":
         clf = torch.load('model.pt')
         # clf.load_state_dict(load(f))
         
-    img = Image.open('7.png')
+    img = Image.open('9.png')
     img = img.convert('L')  # Convert to grayscale if not already in grayscale
     img = img.resize((28, 28))
 
@@ -63,27 +63,28 @@ if __name__ == "__main__":
     
     
     
-    print(torch.argmax(clf(img_tensor)))
+    print("the predicted number is :", torch.argmax(clf(img_tensor)))
     
+
+
     
-    
-#     for epoch in range(10):
-#         for batch in dataset:
-#             X,y = batch
-#             X, y = X.to('cpu'), y.to('cpu')
+    # for epoch in range(10):
+    #     for batch in dataset:
+    #         X,y = batch
+    #         X, y = X.to('cpu'), y.to('cpu')
             
-#             y_pred = clf(X)
-#             loss = loss_func(y_pred, y)
+    #         y_pred = clf(X)
+    #         loss = loss_func(y_pred, y)
             
-#             #apply backpropagation
+    #         #apply backpropagation
             
-#             optimizer.zero_grad()
-#             loss.backward()
-#             optimizer.step()
-#         print(f"Epoch {epoch} Loss: {loss.item()}")
+    #         optimizer.zero_grad()
+    #         loss.backward()
+    #         optimizer.step()
+    #     print(f"Epoch {epoch} Loss: {loss.item()}")
         
-#     with open('model.pt', 'wb') as f:
-#         torch.save(clf, f)
+    # with open('model.pt', 'wb') as f:
+    #     torch.save(clf, f)
 
 # print("Torch version:",torch.__version__)
 

@@ -1,7 +1,10 @@
 import youtube_dl
+from dotenv import load_dotenv
 from pytube import YouTube
 import assemblyai as aai
 import os
+
+load_dotenv()
 
 def download_video(url):
     youtube = YouTube(url)
@@ -20,18 +23,20 @@ if __name__ == "__main__":
     
     
 
-
+api_key = os.getenv('API_KEY')
 aai.settings.api_key = os.getenv('API_KEY')
 
+
+
 # audio_url = audio_stream.url
-FILE_URL = '../Gravity_Pro.mp3'
+FILE_URL = 'Gravity_Pro.mp3'
 
 config = aai.TranscriptionConfig(sentiment_analysis=True)
 
-transcript = aai.Transcriber().transcribe(audio_url, config)
+transcript = aai.Transcriber().transcribe(FILE_URL, config) 
 
-for sentiment_result in transcript.sentiment_analysis:
-    print(sentiment_result.text)
-    print(sentiment_result.sentiment)  # POSITIVE, NEUTRAL, or NEGATIVE
-    print(sentiment_result.confidence)
-    print(f"Timestamp: {sentiment_result.start} - {sentiment_result.end}")
+# for sentiment_result in transcript.sentiment_analysis:
+#     print(sentiment_result.text)
+#     print(sentiment_result.sentiment)  # POSITIVE, NEUTRAL, or NEGATIVE
+#     print(sentiment_result.confidence)
+#     print(f"Timestamp: {sentiment_result.start} - {sentiment_result.end}")
